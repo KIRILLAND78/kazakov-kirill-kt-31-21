@@ -1,7 +1,14 @@
+using NLog;
+using NLog.Web;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+try { 
 // Add services to the container.
 
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -21,3 +28,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+}
+catch (Exception ex) { 
+    logger.Error(ex, "Exception caught: Stopped program");
+}
