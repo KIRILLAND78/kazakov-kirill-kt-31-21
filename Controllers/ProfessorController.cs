@@ -5,21 +5,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace kazakov_kirill_kt_31_21.Controllers
 {
     [Route("[controller]/[action]")]
-    public class FacultyController : Controller
+    public class ProfessorController : Controller
     {
 
-        private readonly ILogger<FacultyController> _logger;
-        private readonly IFacultyService _facultyService;
+        private readonly ILogger<ProfessorController> _logger;
+        private readonly IProfessorService _professorService;
         //private readonly  _logger;
-        public FacultyController(ILogger<FacultyController> logger, IFacultyService facultyService)
+        public ProfessorController(ILogger<ProfessorController> logger, IProfessorService professorService)
         {
             _logger = logger;
-            _facultyService = facultyService;
+            _professorService = professorService;
         }
-        [HttpPost(Name = "DeleteFaculty")]
-        public IActionResult DeleteFaculty(long id, CancellationToken cancellationToken = default)
+        [HttpPost(Name = "GetProfessorsByFilter")]
+        public async Task<IActionResult> GetProfessorsByFilterAsync(ProfessorGroupFilter filter, CancellationToken cancellationToken = default)
         {
-            return Ok(_facultyService.DeleteFaculty(id, cancellationToken));
+
+            return Ok(await _professorService.GetProfessorsByFilterAsync(filter, cancellationToken));
         }
     }
 }

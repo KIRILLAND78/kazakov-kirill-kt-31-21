@@ -1,4 +1,5 @@
-﻿using kazakov_kirill_kt_31_21.Interfaces.ProfessorInterfaces;
+﻿using kazakov_kirill_kt_31_21.Interfaces.FacultyInterfaces;
+using kazakov_kirill_kt_31_21.Interfaces.ProfessorInterfaces;
 
 namespace kazakov_kirill_kt_31_21.ServiceExtensions
 {
