@@ -59,20 +59,13 @@ namespace kazakov_kirill_kt_31_21.Migrations
                         .HasColumnName("name")
                         .HasComment("Название кафедры");
 
-                    b.Property<long?>("lead_professor_id")
-                        .HasColumnType("int8");
-
                     b.HasKey("Id")
                         .HasName("pk_cd_faculty_faculty_id");
 
-                    b.HasIndex("lead_professor_id")
+                    b.HasIndex("LeadProfessorId")
                         .IsUnique();
 
-                    b.ToTable("cd_faculty", null, t =>
-                        {
-                            t.Property("lead_professor_id")
-                                .HasColumnName("lead_professor_id1");
-                        });
+                    b.ToTable("cd_faculty", (string)null);
                 });
 
             modelBuilder.Entity("kazakov_kirill_kt_31_21.Models.Post", b =>
@@ -95,7 +88,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                     b.HasKey("Id")
                         .HasName("pk_cd_post_post_id");
 
-                    b.ToTable("Posts");
+                    b.ToTable("cd_post", (string)null);
                 });
 
             modelBuilder.Entity("kazakov_kirill_kt_31_21.Models.Professor", b =>
@@ -162,7 +155,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                     b.HasKey("Id")
                         .HasName("pk_cd_rank_rank_id");
 
-                    b.ToTable("Ranks");
+                    b.ToTable("cd_rank", (string)null);
                 });
 
             modelBuilder.Entity("kazakov_kirill_kt_31_21.Models.Subject", b =>
@@ -220,7 +213,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                     b.HasKey("Id")
                         .HasName("pk_cd_workload_workload_id");
 
-                    b.ToTable("Workloads");
+                    b.ToTable("cd_workload", (string)null);
                 });
 
             modelBuilder.Entity("ProfessorSubject", b =>
@@ -242,7 +235,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                 {
                     b.HasOne("kazakov_kirill_kt_31_21.Models.Professor", "LeadProfessor")
                         .WithOne("FacultyLead")
-                        .HasForeignKey("kazakov_kirill_kt_31_21.Models.Faculty", "lead_professor_id")
+                        .HasForeignKey("kazakov_kirill_kt_31_21.Models.Faculty", "LeadProfessorId")
                         .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("fk_k_lead_professor_id");
 

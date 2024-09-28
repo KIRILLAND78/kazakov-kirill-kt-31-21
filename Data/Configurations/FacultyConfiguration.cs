@@ -38,7 +38,7 @@ namespace kazakov_kirill_kt_31_21.Data.Configurations
                 .ToTable(TableName)
                 .HasOne(t => t.LeadProfessor)
                 .WithOne(t=>t.FacultyLead)
-                .HasForeignKey("Faculty", "lead_professor_id")
+                .HasForeignKey<Faculty>(t=>t.LeadProfessorId)
                 .HasConstraintName("fk_k_lead_professor_id")
                 .OnDelete(DeleteBehavior.SetNull);
 

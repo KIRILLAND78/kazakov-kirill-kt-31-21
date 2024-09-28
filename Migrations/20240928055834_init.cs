@@ -12,7 +12,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "cd_post",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "int8", nullable: false, comment: "Идентификатор должности")
@@ -25,7 +25,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ranks",
+                name: "cd_rank",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "int8", nullable: false, comment: "Идентификатор ученой степени")
@@ -38,7 +38,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Workloads",
+                name: "cd_workload",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "int8", nullable: false, comment: "Идентификатор учебной нагрузки")
@@ -66,7 +66,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                     table.ForeignKey(
                         name: "fk_k_workload_id",
                         column: x => x.workload_id,
-                        principalTable: "Workloads",
+                        principalTable: "cd_workload",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -78,8 +78,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                     id = table.Column<long>(type: "int8", nullable: false, comment: "Идентификатор кафедры")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "varchar", maxLength: 64, nullable: false, comment: "Название кафедры"),
-                    lead_professor_id = table.Column<long>(type: "int8", nullable: true, comment: "Идентификатор заведующего кафедрой, может быть null"),
-                    lead_professor_id1 = table.Column<long>(type: "int8", nullable: true)
+                    lead_professor_id = table.Column<long>(type: "int8", nullable: true, comment: "Идентификатор заведующего кафедрой, может быть null")
                 },
                 constraints: table =>
                 {
@@ -109,13 +108,13 @@ namespace kazakov_kirill_kt_31_21.Migrations
                     table.ForeignKey(
                         name: "fk_k_post_id",
                         column: x => x.post_id,
-                        principalTable: "Posts",
+                        principalTable: "cd_post",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_k_rank_id",
                         column: x => x.rank_id,
-                        principalTable: "Ranks",
+                        principalTable: "cd_rank",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -145,9 +144,9 @@ namespace kazakov_kirill_kt_31_21.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_cd_faculty_lead_professor_id1",
+                name: "IX_cd_faculty_lead_professor_id",
                 table: "cd_faculty",
-                column: "lead_professor_id1",
+                column: "lead_professor_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -178,7 +177,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
             migrationBuilder.AddForeignKey(
                 name: "fk_k_lead_professor_id",
                 table: "cd_faculty",
-                column: "lead_professor_id1",
+                column: "lead_professor_id",
                 principalTable: "cd_professor",
                 principalColumn: "id",
                 onDelete: ReferentialAction.SetNull);
@@ -198,7 +197,7 @@ namespace kazakov_kirill_kt_31_21.Migrations
                 name: "cd_subject");
 
             migrationBuilder.DropTable(
-                name: "Workloads");
+                name: "cd_workload");
 
             migrationBuilder.DropTable(
                 name: "cd_professor");
@@ -207,10 +206,10 @@ namespace kazakov_kirill_kt_31_21.Migrations
                 name: "cd_faculty");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "cd_post");
 
             migrationBuilder.DropTable(
-                name: "Ranks");
+                name: "cd_rank");
         }
     }
 }
