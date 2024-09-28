@@ -1,4 +1,5 @@
 using kazakov_kirill_kt_31_21.Data;
+using kazakov_kirill_kt_31_21.Middlewares;
 using kazakov_kirill_kt_31_21.ServiceExtensions;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -27,6 +28,7 @@ var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentCla
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
