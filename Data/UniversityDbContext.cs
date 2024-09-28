@@ -19,11 +19,11 @@ namespace kazakov_kirill_kt_31_21.Data
             modelBuilder.ApplyConfiguration(new WorkloadConfiguration());
             base.OnModelCreating(modelBuilder);
         }
-        DbSet<Faculty> Faculties { get; set; }
-        DbSet<Post> Posts { get; set; }
-        DbSet<Professor> Professors { get; set; }
-        DbSet<Rank> Ranks { get; set; }
-        DbSet<Subject> Subjects { get; set; }
-        DbSet<Workload> Workloads { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Professor> Professors { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Workload> Workloads { get; set; }
     }
 }
