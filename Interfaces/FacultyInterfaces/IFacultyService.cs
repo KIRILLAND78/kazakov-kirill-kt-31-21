@@ -23,7 +23,7 @@ namespace kazakov_kirill_kt_31_21.Interfaces.FacultyInterfaces
         public Faculty? DeleteFaculty(long id, CancellationToken cancellationToken = default)
         {
             Faculty faculty = _dbContext.Faculties.Find(id);
-            if (faculty is null) return null;
+            if (faculty is null) throw new Exception("Не найдена кафедра");
             _dbContext.Remove(faculty);
             _dbContext.SaveChanges();
             return faculty;
