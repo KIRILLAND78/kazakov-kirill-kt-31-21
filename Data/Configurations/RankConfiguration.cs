@@ -10,6 +10,8 @@ namespace kazakov_kirill_kt_31_21.Data.Configurations
         private const string TableName = "cd_rank";
         public void Configure(EntityTypeBuilder<Rank> builder)
         {
+            builder.ToTable(TableName);
+
             builder
                 .HasKey(t => t.Id)//id
                 .HasName($"pk_{TableName}_rank_id");//является ключом

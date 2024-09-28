@@ -10,6 +10,7 @@ namespace kazakov_kirill_kt_31_21.Data.Configurations
         private const string TableName = "cd_workload";
         public void Configure(EntityTypeBuilder<Workload> builder)
         {
+            builder.ToTable(TableName);
             builder
                 .HasKey(t => t.Id)//id
                 .HasName($"pk_{TableName}_workload_id");//является ключом
