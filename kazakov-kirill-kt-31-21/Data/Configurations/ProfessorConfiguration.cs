@@ -75,7 +75,11 @@ namespace kazakov_kirill_kt_31_21.Data.Configurations
             builder
                 .ToTable(TableName)
                 .HasMany(t => t.Subjects)
-                .WithMany(t => t.Professors);
+                .WithMany(t => t.Professors)
+                .UsingEntity(m =>
+                {
+                    m.ToTable("cd_subject_professor");
+                });
 
         }
     }
