@@ -9,11 +9,12 @@ namespace kazakov_kirill_kt_31_21.Tests
     public class ProfessorIntegrationTests
     {
         public readonly DbContextOptions<UniversityDbContext> _dbContextOptions;
-        public ProfessorIntegrationTests()
+        public readonly UniversityDbContext ctx;
+        public readonly IProfessorService professorService;
+        public ProfessorIntegrationTests(IProfessorService pf, UniversityDbContext dbContext)
         {
-            _dbContextOptions = new DbContextOptionsBuilder<UniversityDbContext>()
-                .UseInMemoryDatabase(databaseName: "uni_db")
-                .Options;
+            professorService = pf;
+            ctx = dbContext;
         }
         
         public async Task FillDb(UniversityDbContext ctx)
@@ -62,8 +63,6 @@ namespace kazakov_kirill_kt_31_21.Tests
         public async Task GetProfessorsByFilterAsync_EmptyFilter_SixObjects()
         {
             // Arrange
-            var ctx = new UniversityDbContext(_dbContextOptions);
-            var professorService = new ProfessorService(ctx);
             await FillDb(ctx);
             var filter = new ProfessorGroupFilter
             {
@@ -78,8 +77,6 @@ namespace kazakov_kirill_kt_31_21.Tests
         public async Task GetProfessorsByFilterAsync_AllFilter_OneObjects()
         {
             // Arrange
-            var ctx = new UniversityDbContext(_dbContextOptions);
-            var professorService = new ProfessorService(ctx);
             await FillDb(ctx);
 
             var filter = new ProfessorGroupFilter
