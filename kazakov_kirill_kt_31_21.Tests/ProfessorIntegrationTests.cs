@@ -70,7 +70,7 @@ namespace kazakov_kirill_kt_31_21.Tests
             };
             var result = await professorService.GetProfessorsByFilterAsync(filter, CancellationToken.None);
 
-            Assert.Equal(6, result.Count);
+            Assert.Equal(6, result.Count());
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace kazakov_kirill_kt_31_21.Tests
                 RankId = 1
             };
             var result = await professorService.GetProfessorsByFilterAsync(filter, CancellationToken.None);
-            Assert.Equal(1, result.Count);
+            Assert.Equal(1, result.Count());
         }
     }
 }

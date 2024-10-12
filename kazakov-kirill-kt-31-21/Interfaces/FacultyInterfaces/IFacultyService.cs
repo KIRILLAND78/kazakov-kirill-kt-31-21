@@ -3,14 +3,15 @@ using kazakov_kirill_kt_31_21.DTO;
 using kazakov_kirill_kt_31_21.Filters.ProfessorFilters;
 using kazakov_kirill_kt_31_21.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace kazakov_kirill_kt_31_21.Interfaces.FacultyInterfaces
 {
     public interface IFacultyService
     {
-        public Faculty? DeleteFaculty(long id, CancellationToken cancellationToken);
-        public Faculty CreateFaculty(FacultyDTO facultyDTO, CancellationToken cancellationToken);
-        public Task<List<Faculty>> IndexFacultyAsync(CancellationToken cancellationToken);
+        public Task<Faculty?> DeleteFaculty(long id, CancellationToken cancellationToken);
+        public Task<Faculty> CreateFaculty(FacultyDTO facultyDTO, CancellationToken cancellationToken);
+        public Task<Faculty[]> IndexFacultyAsync(CancellationToken cancellationToken);
     }
     public class FacultyService : IFacultyService
     {
@@ -20,26 +21,26 @@ namespace kazakov_kirill_kt_31_21.Interfaces.FacultyInterfaces
             _dbContext = dbContext;
         }
 
-        public Faculty? DeleteFaculty(long id, CancellationToken cancellationToken = default)
+        public async Task<Faculty?> DeleteFaculty(long id, CancellationToken cancellationToken = default)
         {
-            Faculty faculty = _dbContext.Faculties.Find(id);
+            Faculty faculty = await _dbContext.Faculties.FindAsync(id);
             if (faculty is null) throw new Exception("Не найдена кафедра");
             _dbContext.Remove(faculty);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return faculty;
         }
 
-        public Faculty CreateFaculty(FacultyDTO facultyDTO, CancellationToken cancellationToken = default)
+        public async Task<Faculty> CreateFaculty(FacultyDTO facultyDTO, CancellationToken cancellationToken = default)
         {
             Faculty faculty = new Faculty() { Name = facultyDTO.Name};
-            _dbContext.Add(faculty);
-            _dbContext.SaveChanges();
+            await _dbContext.AddAsync(faculty);
+            await _dbContext.SaveChangesAsync();
             return faculty;
         }
 
-        public Task<List<Faculty>> IndexFacultyAsync(CancellationToken cancellationToken = default)
+        public Task<Faculty[]> IndexFacultyAsync(CancellationToken cancellationToken = default)
         {
-            return _dbContext.Faculties.ToListAsync();
+            return _dbContext.Faculties.ToArrayAsync();
         }
     }
 }

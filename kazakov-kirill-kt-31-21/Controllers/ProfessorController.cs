@@ -19,7 +19,6 @@ namespace kazakov_kirill_kt_31_21.Controllers
         [HttpPost(Name = "GetProfessorsByFilter")]
         public async Task<IActionResult> GetProfessorsByFilterAsync(ProfessorGroupFilter filter, CancellationToken cancellationToken = default)
         {
-
             return Ok(await _professorService.GetProfessorsByFilterAsync(filter, cancellationToken));
         }
     }
