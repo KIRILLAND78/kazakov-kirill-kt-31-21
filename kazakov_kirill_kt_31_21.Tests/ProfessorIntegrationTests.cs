@@ -64,7 +64,7 @@ namespace kazakov_kirill_kt_31_21.Tests
         {
             // Arrange
             await FillDb(ctx);
-            var filter = new ProfessorGroupFilter
+            var filter = new ProfessorFilter
             {
 
             };
@@ -79,7 +79,7 @@ namespace kazakov_kirill_kt_31_21.Tests
             // Arrange
             await FillDb(ctx);
 
-            var filter = new ProfessorGroupFilter
+            var filter = new ProfessorFilter
             {
                 FacultyId = 1,
                 PostId = 1,
